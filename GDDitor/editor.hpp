@@ -36,15 +36,10 @@ private:
     // buttons
     EditorButton nodeButton;
 
-    // pos fields
+    // properties
     EditorProperty posXProperty;
     EditorProperty posYProperty;
-
-    //QLabel posXtext;
-    //CustomTextField posXField;
-    //QLabel posYtext;
-    //CustomTextField posYField;
-
+    EditorProperty tittleProperty;
 
 public:
     Editor();

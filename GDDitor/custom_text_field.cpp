@@ -19,7 +19,8 @@ void CustomTextField::Validate()
 
 void CustomTextField::keyPressEvent(QKeyEvent* _event)
 {
-    if (_event->key() == Qt::Key_Return)
+    int key = _event->key();
+    if (key == Qt::Key_Return || key == Qt::Key_Enter)
     {
         Validate();
     }

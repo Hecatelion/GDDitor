@@ -7,7 +7,17 @@
 
 Node::Node()
     : QLabel()
-{ }
+{
+    // palette
+    palette.setColor(QPalette::Window, Qt::blue);
+    palette.setColor(QPalette::WindowText, Qt::black);
+    setPalette(palette);
+    setAutoFillBackground(true);
+
+    // font
+    font = QFont("Arial", 14, QFont::Thin);
+    setFont(font);
+}
 
 Node::Node(QWidget* _parent)
     : QLabel(_parent)
@@ -62,7 +72,8 @@ void Node::SetPos(int _x, int _y)
 
     QLabel::setGeometry(_x, _y, w, h);
 
-    // draw() ?
+    QLabel::setText("Truc");
+    qDebug() << QLabel::text();
 }
 
 vec2<int> Node::GetSize()

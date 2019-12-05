@@ -14,6 +14,9 @@ namespace Settings
     const int c_inspectorSizeX = 250;
     const int c_inspectorSizeY = 580;
 
+    const int c_propertyPosY = 100;
+    const int c_propertySizeY = 25;
+
     const int c_windowSizeX = c_documentSizeX + c_inspectorSizeX + c_margin * 3;
     const int c_windowSizeY = c_documentSizeY + c_margin * 2;
 

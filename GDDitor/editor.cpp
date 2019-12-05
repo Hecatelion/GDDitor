@@ -34,34 +34,33 @@ void Editor::Init()
                     c_inspectorSizeX,
                     60);
 
-    // fileds
+    // properies
 
-        // pos X property
+        // pos X
     posXProperty.Init(&window,
-                      c_inspectorPosX, 100,
-                      (c_inspectorSizeX - c_margin) / 2, 25,
+                      c_inspectorPosX, c_propertyPosY,
+                      (c_inspectorSizeX - c_margin) / 2, c_propertySizeY,
                       0.4f,
                       "x");
 
     connect(&posXProperty, SIGNAL(validated()), this, SLOT(UpdateSelectionPosition()));
 
-        // pos Y property
+        // pos Y
     posYProperty.Init(&window,
-                      c_inspectorPosX + posXProperty.size().width() + c_margin, 100,
-                      (c_inspectorSizeX - c_margin) / 2, 25,
+                      c_inspectorPosX + posXProperty.size().width() + c_margin, c_propertyPosY,
+                      (c_inspectorSizeX - c_margin) / 2, c_propertySizeY,
                       0.4f,
                       "y");
 
-    connect(&posXProperty, SIGNAL(validated()), this, SLOT(UpdateSelectionPosition()));
+    connect(&posYProperty, SIGNAL(validated()), this, SLOT(UpdateSelectionPosition()));
 
-    /*
-    posXtext.setParent(&window);
-    posXtext.setGeometry(c_inspectorPosX, 100, 30, 30);
-    posXField.Init(&window, c_inspectorPosX, 100, 50, 30, "x");
-    connect(&posXField, SIGNAL(validated()), this, SLOT(UpdateSelectionPosition()));
-    posYField.Init(&window, c_inspectorPosX + c_margin + 100, 100, 50, 30, "y");
-    connect(&posYField, SIGNAL(validated()), this, SLOT(UpdateSelectionPosition()));
-    */
+        // tittle
+    tittleProperty.Init(&window,
+                        c_inspectorPosX, c_propertyPosY + c_propertySizeY + c_margin,
+                        c_inspectorSizeX, c_propertySizeY,
+                        0.3f,
+                        "Tittle");
+
 }
 
 void Editor::Open(Document* _document)
@@ -92,17 +91,19 @@ void Editor::EmptySelection()
     // hide contexual inspector
     posXProperty.hide();
     posYProperty.hide();
+    tittleProperty.hide();
 }
 
 void Editor::SetSelection(Node* _node)
 {
     selection = _node;
 
-    // set contextual inspector to selection values
+    // set contextual inspector to selection's values
     posXProperty.SetFieldContent(QString::number(selection->GetPos().x));
     posYProperty.SetFieldContent(QString::number(selection->GetPos().y));
 
     // show contextual inspector
     posXProperty.show();
     posYProperty.show();
+    tittleProperty.show();
 }

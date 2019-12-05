@@ -15,6 +15,9 @@ private:
     Document* document{};
     bool isSelected = false;
 
+    QFont font;
+    QPalette palette;
+
 public:
     Node();
     Node(QWidget* _parent);
@@ -28,7 +31,7 @@ public:
     vec2<int> GetPos();
     void SetPos(int _x, int _y);
     vec2<int> GetSize();
-    void SetSize(int _x, int _y);
+    void SetSize(int _w, int _h);
 
     void SetSelected();
     void SetUnselected();
