@@ -1,6 +1,8 @@
 #pragma once
 
 #include <QObject>
+#include <QLabel>
+#include "editor_property.hpp"
 #include "editor_button.hpp"
 #include "custom_text_field.hpp"
 #include "utils.hpp"
@@ -33,8 +35,15 @@ private:
 
     // buttons
     EditorButton nodeButton;
-    CustomTextField posFieldX;
-    CustomTextField posFieldY;
+
+    // pos fields
+    EditorProperty posXProperty;
+    EditorProperty posYProperty;
+
+    //QLabel posXtext;
+    //CustomTextField posXField;
+    //QLabel posYtext;
+    //CustomTextField posYField;
 
 
 public:

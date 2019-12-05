@@ -9,8 +9,6 @@ void CustomTextField::Init(QWidget* _parentWindow, int _x, int _y, int _w, int _
     setParent(_parentWindow);
     setGeometry(_x, _y, _w, _h);
     setText(_str);
-
-    hide();
 }
 
 void CustomTextField::Validate()
