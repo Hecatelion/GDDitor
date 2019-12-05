@@ -1,0 +1,7 @@
+- create custom nodes
+    -> pos 	(mouse)	
+    -> size 	(editor)
+    -> color	(editor)
+    -> title	(editor)
+
+- modify custom nodes
