@@ -8,20 +8,20 @@
 Node::Node()
     : QLabel()
 {
+
     // palette
-    palette.setColor(QPalette::Window, Qt::blue);
+    /*palette.setColor(QPalette::Window, Qt::blue);
     palette.setColor(QPalette::WindowText, Qt::black);
     setPalette(palette);
-    setAutoFillBackground(true);
+    setAutoFillBackground(true);*/
 
-    // font
-    font = QFont("Arial", 14, QFont::Thin);
-    setFont(font);
 }
 
 Node::Node(QWidget* _parent)
     : QLabel(_parent)
-{ }
+{
+
+}
 
 void Node::paintEvent(QPaintEvent* _event)
 {
@@ -71,9 +71,6 @@ void Node::SetPos(int _x, int _y)
     int h = QLabel::size().height();
 
     QLabel::setGeometry(_x, _y, w, h);
-
-    QLabel::setText("Truc");
-    qDebug() << QLabel::text();
 }
 
 vec2<int> Node::GetSize()
@@ -89,10 +86,34 @@ void Node::SetSize(int _w, int _h)
     QLabel::setGeometry(x, y, _w, _h);
 }
 
+QString Node::GetTittle()
+{
+    return tittle.text();
+}
+void Node::SetTittle(QString _str)
+{
+    tittle.setText(_str);
+}
+
 void Node::Draw()
 {
     update();
     QLabel::show();
+}
+
+void Node::InitTittle()
+{
+    // font
+    font = QFont("Arial", 14, QFont::Thin);
+    setFont(font);
+
+    // tittle
+    tittle.setParent(this);
+    tittle.setGeometry(0,0, this->size().width(),  this->size().height());
+    tittle.setAlignment(Qt::AlignCenter);
+    tittle.setFont(font);
+    tittle.setText("Tittle");
+    tittle.show();
 }
 
 void Node::Init(Document* _document)
@@ -111,8 +132,7 @@ void Node::Init(Document* _document)
     }
 
     SetSize(100, 100);
-
-    setText("Node");
+    InitTittle();
 
     Draw();
 }

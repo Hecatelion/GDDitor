@@ -54,4 +54,5 @@ public:
 
 public slots:
     void UpdateSelectionPosition();
+    void UpdateSelectionTittle();
 };

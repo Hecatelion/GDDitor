@@ -61,6 +61,7 @@ void Editor::Init()
                         0.3f,
                         "Tittle");
 
+    connect(&tittleProperty, SIGNAL(validated()), this, SLOT(UpdateSelectionTittle()));
 }
 
 void Editor::Open(Document* _document)
@@ -84,6 +85,11 @@ void Editor::UpdateSelectionPosition()
     selection->SetPos(newPos.x, newPos.y);
 }
 
+void Editor::UpdateSelectionTittle()
+{
+    selection->SetTittle(tittleProperty.GetFieldContent());
+}
+
 void Editor::EmptySelection()
 {
     selection = nullptr;
@@ -101,6 +107,7 @@ void Editor::SetSelection(Node* _node)
     // set contextual inspector to selection's values
     posXProperty.SetFieldContent(QString::number(selection->GetPos().x));
     posYProperty.SetFieldContent(QString::number(selection->GetPos().y));
+    tittleProperty.SetFieldContent(selection->GetTittle());
 
     // show contextual inspector
     posXProperty.show();
