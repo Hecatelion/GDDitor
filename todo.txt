@@ -1,7 +1,3 @@
-- modify custom nodes
-    -> size 	(editor)
-    -> title	(editor)	/!\ init (QLabel tittle) in Node class
-
 - saving
 
 - add links
