@@ -12,6 +12,7 @@ SOURCES += \
     editor.cpp \
     editor_button.cpp \
     editor_property.cpp \
+    link.cpp \
     main.cpp \
     node.cpp
 
@@ -22,6 +23,8 @@ HEADERS += \
     editor.hpp \
     editor_button.hpp \
     editor_property.hpp \
+    link.hpp \
+    link_list.hpp \
     node.hpp \
     settings.hpp \
     utils.hpp

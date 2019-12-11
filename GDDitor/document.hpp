@@ -21,8 +21,6 @@ class Document : public QObject
     Q_OBJECT
 
 private:
-    QPalette palette;
-
     QVector<Node*> nodes{};
     Node* selection{};
 

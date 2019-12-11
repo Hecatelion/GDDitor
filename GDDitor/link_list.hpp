@@ -1,4 +1,14 @@
-#ifndef LINK_LIST_H
-#define LINK_LIST_H
+#pragma once
 
-#endif // LINK_LIST_H
+#include <QWidget>
+#include <vector>
+
+class LinkList : public QWidget
+{
+private:
+
+public:
+    LinkList();
+
+    void AddLink();
+};

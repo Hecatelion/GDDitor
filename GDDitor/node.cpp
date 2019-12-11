@@ -120,6 +120,7 @@ void Node::Init(Document* _document)
 {
     static bool isFirst = true;
     document = _document;
+    QLabel::setParent(&_document->window);
 
     if (isFirst)
     {

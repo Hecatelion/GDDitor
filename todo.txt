@@ -1,3 +1,4 @@
 - saving
+	- make nodes become vector<Node>, instead of vector<Node*>
 
-- add links
+- add links /!\

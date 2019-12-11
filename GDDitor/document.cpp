@@ -9,6 +9,7 @@ Document::Document()
     : QObject()
 {
     // background color
+    QPalette palette;
     QColor softYellow(255, 217, 179);
     palette.setColor(QPalette::Window, softYellow);
     window.setPalette(palette);
