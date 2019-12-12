@@ -11,6 +11,14 @@ Editor::Editor()
     Init();
 }
 
+Editor::~Editor()
+{
+    if (currentDocument != nullptr)
+    {
+        delete (currentDocument);
+    }
+}
+
 QWidget* Editor::GetWindow()
 {
     return &window;
@@ -28,14 +36,16 @@ void Editor::Init()
     window.show();
 
     // buttons
-    nodeButton.Init(&window,
-                    c_inspectorPosX,
-                    c_inspectorPosY,
-                    c_inspectorSizeX,
-                    60);
+    nodeButton.Init(&window, c_inspectorPosX, c_inspectorPosY, c_inspectorSizeX, 60, "Add Node");
+    QObject::connect(&nodeButton, SIGNAL(clicked()), this, SLOT(AddNodeToDocument()));
+
+    saveDocumentButton.Init(&window, c_margin, c_margin, 60, c_toolbarSizeY, "Save");
+    QObject::connect(&saveDocumentButton, SIGNAL(clicked()), this, SLOT(SaveDocument()));
+
+    loadDocumentButton.Init(&window, c_margin, 60 + 2 * c_margin, 60, c_toolbarSizeY, "Load");
+    QObject::connect(&loadDocumentButton, SIGNAL(clicked()), this, SLOT(LoadDocument()));
 
     // properies
-
         // pos X
     posXProperty.Init(&window,
                       c_inspectorPosX, c_propertyPosY,
@@ -71,10 +81,43 @@ void Editor::Open(Document* _document)
 
     // give the editor reference to document
     _document->Link(this);
-
-    // link editor button to document
-    QObject::connect(&nodeButton, SIGNAL(clicked()), currentDocument, SLOT(AddNode()));
 }
+
+// ------------------------------------
+//          document actions
+// ------------------------------------
+
+void Editor::AddNodeToDocument()
+{
+    currentDocument->AddNode();
+}
+
+void Editor::SaveDocument()
+{
+    QString dir = "saves/"; // file explorer
+    currentDocument->Save(dir);
+}
+
+void Editor::LoadDocument() // json read
+{
+    // delete current doc to avoid memory leaks
+    if (currentDocument != nullptr)
+    {
+        delete (currentDocument);
+    }
+
+    QString dir = "saves/doc1.gdd"; // file explorer
+
+    Document* loadedDoc = new Document();
+    loadedDoc->Load(dir);
+
+    // link loaded document in editor
+    Open(loadedDoc);
+}
+
+// ------------------------------------
+//          selection actions
+// ------------------------------------
 
 void Editor::UpdateSelectionPosition()
 {

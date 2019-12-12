@@ -101,7 +101,7 @@ void Node::Draw()
     QLabel::show();
 }
 
-void Node::InitTittle()
+void Node::InitTittle(QString _str)
 {
     // font
     font = QFont("Arial", 14, QFont::Thin);
@@ -112,28 +112,19 @@ void Node::InitTittle()
     tittle.setGeometry(0,0, this->size().width(),  this->size().height());
     tittle.setAlignment(Qt::AlignCenter);
     tittle.setFont(font);
-    tittle.setText("Tittle");
+    tittle.setText(_str);
     tittle.show();
 }
 
-void Node::Init(Document* _document)
+void Node::Init(Document* _document, int _x, int _y, QString _tittle)
 {
-    static bool isFirst = true;
     document = _document;
     QLabel::setParent(&_document->window);
 
-    if (isFirst)
-    {
-        SetPos(250, 300);
-        isFirst = false;
-    }
-    else
-    {
-        SetPos(400, 300);
-    }
+    SetPos(_x, _y);
 
     SetSize(100, 100);
-    InitTittle();
+    InitTittle(_tittle);
 
     Draw();
 }
@@ -141,7 +132,6 @@ void Node::Init(Document* _document)
 void Node::SetSelected()
 {
     isSelected = true;
-    //document->SetSelection(this);
     Draw();
 }
 

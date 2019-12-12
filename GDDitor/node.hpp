@@ -27,8 +27,8 @@ public:
     void mousePressEvent(QMouseEvent* _mouseEvent) override;
 
     void Draw();
-    void InitTittle();
-    void Init(Document* _document);
+    void InitTittle(QString _str);
+    void Init(Document* _document, int _x, int _y, QString _tittle);
 
     vec2<int> GetPos();
     void SetPos(int _x, int _y);

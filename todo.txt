@@ -1,4 +1,5 @@
 - saving
-	- make nodes become vector<Node>, instead of vector<Node*>
+	- create Editor::NewDoc() -> to fix Editor::~Editor()
+	- finish Document::Load();
 
 - add links /!\

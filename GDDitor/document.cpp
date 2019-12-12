@@ -1,5 +1,9 @@
 #include "document.hpp"
 
+#include <QFile>
+#include <QJsonObject>
+#include <QJsonDocument>
+
 #include "editor.hpp"
 #include "settings.hpp"
 
@@ -16,7 +20,7 @@ Document::Document()
     window.setAutoFillBackground(true);
 
     // size and pos
-    window.setGeometry(c_margin, c_margin, c_documentSizeX, c_documentSizeY);
+    window.setGeometry(c_margin, c_toolbarSizeY + c_margin * 2, c_documentSizeX, c_documentSizeY);
 
     // hide window cause it is not link to the editor for now
     window.hide();
@@ -27,21 +31,57 @@ Document::Document()
 
 Document::~Document()
 {
-    for (auto& node : nodes)
-    {
-        if (node != nullptr)
-        {
-            delete(node);
-        }
-    }
-
-    nodes.clear();
+    Reset();
 }
 
-void Document::AddNode()
+void Document::Save(QString _dir) // json write
+{
+    QFile saveFile(_dir + "doc1.gdd");
+
+    // open file and check if it's valid
+    if(!saveFile.open(QIODevice::WriteOnly))
+    {
+        qWarning("Couldn't open save file.");
+        return;
+    }
+
+    // write values in the file
+    QJsonObject json;
+    json["name"] = "doc2";
+
+    QJsonDocument jsonDoc(json);
+    saveFile.write(jsonDoc.toJson());
+
+    qDebug() << "doc saved! :3";
+}
+
+void Document::Load(QString _path)
+{
+    // clear document datas
+    Reset();
+
+    QFile loadFile(_path);
+
+    // open file and check if it's valid
+    if(!loadFile.open(QIODevice::ReadOnly))
+    {
+        qWarning("Couldn't open file.");
+        return;
+    }
+
+     QByteArray saveData = loadFile.readAll();
+     QJsonDocument jsonDoc(QJsonDocument::fromJson(saveData));
+
+     // read values from file
+     name = jsonDoc["name"].isString();
+
+     qDebug() << name;
+}
+
+void Document::AddNode(int _x, int _y, QString _tittle)
 {
     Node* newNode = new Node(&window);
-    newNode->Init(this);
+    newNode->Init(this, _x, _y, _tittle);
 
     nodes.push_back(newNode);
 }
@@ -86,4 +126,21 @@ void Document::SetSelection(Node* _node)
 
     // transmite selection to editor
     editor->SetSelection(_node);
+}
+
+void Document::Reset()
+{
+    // name
+    name = "no name";
+
+    // nodes
+    for (auto& node : nodes)
+    {
+        if (node != nullptr)
+        {
+            delete(node);
+        }
+    }
+
+    nodes.clear();
 }

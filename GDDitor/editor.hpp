@@ -6,7 +6,7 @@
 #include "editor_button.hpp"
 #include "custom_text_field.hpp"
 #include "utils.hpp"
-
+#include "document.hpp"
 
 enum class e_EditorMode
 {
@@ -22,7 +22,6 @@ class Editor : public QObject
     Q_OBJECT
 
 private:
-    // opened document reference
     Document* currentDocument;
 
     // window settings
@@ -34,6 +33,9 @@ private:
     Node* selection;
 
     // buttons
+    EditorButton newDocumentButton;
+    EditorButton saveDocumentButton;
+    EditorButton loadDocumentButton;
     EditorButton nodeButton;
 
     // properties
@@ -43,6 +45,7 @@ private:
 
 public:
     Editor();
+    ~Editor();
     void Init();
 
     QWidget* GetWindow();
@@ -53,6 +56,9 @@ public:
     void SetSelection(Node* _node);
 
 public slots:
+    void SaveDocument();
+    void LoadDocument();
+    void AddNodeToDocument();
     void UpdateSelectionPosition();
     void UpdateSelectionTittle();
 };

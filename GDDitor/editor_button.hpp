@@ -8,7 +8,7 @@ class EditorButton : public QPushButton
 
 public:
     EditorButton() = default;
-    EditorButton(QWidget* _window, int _x, int _y);
+    //EditorButton(QWidget* _window, int _x, int _y);
 
-    void Init(QWidget* _window, int _x, int _y, int _w, int _h);
+    void Init(QWidget* _window, int _x, int _y, int _w, int _h, QString _str);
 };
