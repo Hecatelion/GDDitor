@@ -1,5 +1,6 @@
 - saving
 	- create Editor::NewDoc() -> to fix Editor::~Editor()
 	- finish Document::Load();
+	- where is Load button ? doesn't appear in toolbar
 
 - add links /!\
