@@ -56,9 +56,14 @@ public:
     void SetSelection(Node* _node);
 
 public slots:
-    void SaveDocument();
+    // document actions
+    void DeleteCurrentDocument();
+    void OpenNewDocument();
     void LoadDocument();
+    void SaveDocument();
     void AddNodeToDocument();
+
+    // selection actions
     void UpdateSelectionPosition();
     void UpdateSelectionTittle();
 };

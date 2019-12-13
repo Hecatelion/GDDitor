@@ -22,6 +22,7 @@ class Document : public QObject
 
 private:
     QString name;
+    QLabel nameLabel;
     QVector<Node*> nodes{};
     Node* selection{};
 
@@ -31,13 +32,15 @@ public:
     ClickableWidget window;
     Editor* editor;
 
+    void SetName(QString _name);
+    const QString GetName();
     void Reset();
 
     Document();
     ~Document();
 
 public slots:
-    void Save(QString _directory); // load and save
+    void Save(QString _directory);
     void Load(QString _path);
     void Link(Editor* _editor);
     void AddNode(int _x = 0, int _y = 0, QString _tittle = "Node");

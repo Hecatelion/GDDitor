@@ -15,9 +15,9 @@ int main(int argc, char **argv)
     QApplication app(argc, argv);
 
     Editor editor;
-    Document document;
+    //Document document;
 
-    editor.Open(&document);
+    //editor.Open(&document);
 
     app.exec();
     return 0;

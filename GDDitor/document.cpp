@@ -27,6 +27,9 @@ Document::Document()
 
     // connect window clicked signal to unselect current selection
     connect(&window, SIGNAL(clicked()), this, SLOT(EmptySelection()));
+
+    // init datas
+    Reset();
 }
 
 Document::~Document()
@@ -73,9 +76,9 @@ void Document::Load(QString _path)
      QJsonDocument jsonDoc(QJsonDocument::fromJson(saveData));
 
      // read values from file
-     name = jsonDoc["name"].isString();
+     nameLabel.text() = (jsonDoc["name"].isString());
 
-     qDebug() << name;
+     qDebug() << nameLabel.text();
 }
 
 void Document::AddNode(int _x, int _y, QString _tittle)
@@ -131,7 +134,7 @@ void Document::SetSelection(Node* _node)
 void Document::Reset()
 {
     // name
-    name = "no name";
+    SetName("no name");
 
     // nodes
     for (auto& node : nodes)
@@ -143,4 +146,9 @@ void Document::Reset()
     }
 
     nodes.clear();
+}
+
+const QString Document::GetName()
+{
+    return nameLabel.text();
 }

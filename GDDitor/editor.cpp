@@ -9,14 +9,12 @@ using namespace Settings;
 Editor::Editor()
 {
     Init();
+    OpenNewDocument();
 }
 
 Editor::~Editor()
 {
-    if (currentDocument != nullptr)
-    {
-        delete (currentDocument);
-    }
+    DeleteCurrentDocument();
 }
 
 QWidget* Editor::GetWindow()
@@ -42,7 +40,7 @@ void Editor::Init()
     saveDocumentButton.Init(&window, c_margin, c_margin, 60, c_toolbarSizeY, "Save");
     QObject::connect(&saveDocumentButton, SIGNAL(clicked()), this, SLOT(SaveDocument()));
 
-    loadDocumentButton.Init(&window, c_margin, 60 + 2 * c_margin, 60, c_toolbarSizeY, "Load");
+    loadDocumentButton.Init(&window, 60 + 2 * c_margin, c_margin, 60, c_toolbarSizeY, "Load");
     QObject::connect(&loadDocumentButton, SIGNAL(clicked()), this, SLOT(LoadDocument()));
 
     // properies
@@ -72,6 +70,9 @@ void Editor::Init()
                         "Tittle");
 
     connect(&tittleProperty, SIGNAL(validated()), this, SLOT(UpdateSelectionTittle()));
+
+    // document
+    currentDocument = nullptr;
 }
 
 void Editor::Open(Document* _document)
@@ -101,10 +102,7 @@ void Editor::SaveDocument()
 void Editor::LoadDocument() // json read
 {
     // delete current doc to avoid memory leaks
-    if (currentDocument != nullptr)
-    {
-        delete (currentDocument);
-    }
+    DeleteCurrentDocument();
 
     QString dir = "saves/doc1.gdd"; // file explorer
 
@@ -113,6 +111,24 @@ void Editor::LoadDocument() // json read
 
     // link loaded document in editor
     Open(loadedDoc);
+}
+
+void Editor::OpenNewDocument()
+{
+    // delete current doc to avoid memory leaks
+    DeleteCurrentDocument();
+
+    Document* blankDoc = new Document();
+
+    Open(blankDoc);
+}
+
+void Editor::DeleteCurrentDocument()
+{
+    if (currentDocument != nullptr)
+    {
+        delete (currentDocument);
+    }
 }
 
 // ------------------------------------

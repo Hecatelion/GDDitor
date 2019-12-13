@@ -3,4 +3,6 @@
 	- finish Document::Load();
 	- where is Load button ? doesn't appear in toolbar
 
+- Document QString name; -> Editor TextField nameField;
+
 - add links /!\
