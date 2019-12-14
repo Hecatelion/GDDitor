@@ -39,6 +39,7 @@ private:
     EditorButton nodeButton;
 
     // properties
+    EditorProperty documentNameProperty;
     EditorProperty posXProperty;
     EditorProperty posYProperty;
     EditorProperty tittleProperty;
@@ -57,11 +58,12 @@ public:
 
 public slots:
     // document actions
+    void UpdateDocumentName();
+    void AddNodeToDocument();
     void DeleteCurrentDocument();
     void OpenNewDocument();
     void LoadDocument();
     void SaveDocument();
-    void AddNodeToDocument();
 
     // selection actions
     void UpdateSelectionPosition();

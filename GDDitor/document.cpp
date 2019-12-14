@@ -39,7 +39,7 @@ Document::~Document()
 
 void Document::Save(QString _dir) // json write
 {
-    QFile saveFile(_dir + "doc1.gdd");
+    QFile saveFile(_dir + name + ".gdd");
 
     // open file and check if it's valid
     if(!saveFile.open(QIODevice::WriteOnly))
@@ -50,7 +50,7 @@ void Document::Save(QString _dir) // json write
 
     // write values in the file
     QJsonObject json;
-    json["name"] = "doc2";
+    json["name"] = name;
 
     QJsonDocument jsonDoc(json);
     saveFile.write(jsonDoc.toJson());
@@ -74,11 +74,12 @@ void Document::Load(QString _path)
 
      QByteArray saveData = loadFile.readAll();
      QJsonDocument jsonDoc(QJsonDocument::fromJson(saveData));
+     QJsonObject json = jsonDoc.object();
 
      // read values from file
-     nameLabel.text() = (jsonDoc["name"].isString());
+     name = json["name"].toString();
 
-     qDebug() << nameLabel.text();
+     qDebug() << name;
 }
 
 void Document::AddNode(int _x, int _y, QString _tittle)
@@ -134,7 +135,7 @@ void Document::SetSelection(Node* _node)
 void Document::Reset()
 {
     // name
-    SetName("no name");
+    SetName("no_name");
 
     // nodes
     for (auto& node : nodes)
@@ -150,5 +151,10 @@ void Document::Reset()
 
 const QString Document::GetName()
 {
-    return nameLabel.text();
+    return name;
+}
+
+void Document::SetName(QString _name)
+{
+    name = _name;
 }

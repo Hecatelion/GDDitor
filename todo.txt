@@ -1,8 +1,4 @@
 - saving
-	- create Editor::NewDoc() -> to fix Editor::~Editor()
-	- finish Document::Load();
-	- where is Load button ? doesn't appear in toolbar
-
-- Document QString name; -> Editor TextField nameField;
+	- Load document with browser!
 
 - add links /!\

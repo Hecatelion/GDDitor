@@ -44,6 +44,15 @@ void Editor::Init()
     QObject::connect(&loadDocumentButton, SIGNAL(clicked()), this, SLOT(LoadDocument()));
 
     // properies
+        // document name
+    documentNameProperty.Init(&window,
+                         c_inspectorPosX - 300 - c_margin, c_margin,
+                         300, c_propertySizeY,
+                         0.5f,
+                         "document name");
+
+    connect(&documentNameProperty, SIGNAL(validated()), this, SLOT(UpdateDocumentName()));
+
         // pos X
     posXProperty.Init(&window,
                       c_inspectorPosX, c_propertyPosY,
@@ -80,6 +89,10 @@ void Editor::Open(Document* _document)
     // give the document reference to editor
     currentDocument = _document;
 
+    // init document name property
+    documentNameProperty.SetFieldContent(currentDocument->GetName());
+    documentNameProperty.show();
+
     // give the editor reference to document
     _document->Link(this);
 }
@@ -87,6 +100,11 @@ void Editor::Open(Document* _document)
 // ------------------------------------
 //          document actions
 // ------------------------------------
+
+void Editor::UpdateDocumentName()
+{
+    currentDocument->SetName(documentNameProperty.GetFieldContent());
+}
 
 void Editor::AddNodeToDocument()
 {

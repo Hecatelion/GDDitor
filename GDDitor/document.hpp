@@ -22,7 +22,6 @@ class Document : public QObject
 
 private:
     QString name;
-    QLabel nameLabel;
     QVector<Node*> nodes{};
     Node* selection{};
 
