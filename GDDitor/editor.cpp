@@ -1,5 +1,7 @@
 #include "editor.hpp"
 
+#include <QFileDialog>
+
 #include "document.hpp"
 #include "settings.hpp"
 #include "utils.hpp"
@@ -122,10 +124,11 @@ void Editor::LoadDocument() // json read
     // delete current doc to avoid memory leaks
     DeleteCurrentDocument();
 
-    QString dir = "saves/doc1.gdd"; // file explorer
+    //QString path = "saves/doc1.gdd"; // file explorer
+    QString path = QFileDialog::getOpenFileName(nullptr, tr("Document Selection"), "saves/", tr("File (*.gdd)"));
 
     Document* loadedDoc = new Document();
-    loadedDoc->Load(dir);
+    loadedDoc->Load(path);
 
     // link loaded document in editor
     Open(loadedDoc);

@@ -1,4 +1,4 @@
 - saving
-	- Load document with browser!
+	- Save Nodes { posX, posY, tittle }
 
 - add links /!\

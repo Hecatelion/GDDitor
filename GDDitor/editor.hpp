@@ -60,10 +60,11 @@ public slots:
     // document actions
     void UpdateDocumentName();
     void AddNodeToDocument();
-    void DeleteCurrentDocument();
+
     void OpenNewDocument();
     void LoadDocument();
     void SaveDocument();
+    void DeleteCurrentDocument();
 
     // selection actions
     void UpdateSelectionPosition();
