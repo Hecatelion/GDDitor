@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QJsonArray>
 
 #include "editor.hpp"
 #include "settings.hpp"
@@ -52,6 +53,20 @@ void Document::Save(QString _dir) // json write
     QJsonObject json;
     json["name"] = name;
 
+    // write each node values
+    QJsonArray nodesJsonArr;
+    for (const auto& n : nodes)
+    {
+        QJsonObject nodeJson;
+        nodeJson["tittle"] = n->GetTittle();
+        nodeJson["x"] = n->GetPos().x;
+        nodeJson["y"] = n->GetPos().y;
+
+        nodesJsonArr.append(nodeJson);
+    }
+    json["nodes"] = nodesJsonArr;
+
+    // save as json file
     QJsonDocument jsonDoc(json);
     saveFile.write(jsonDoc.toJson());
 
@@ -78,6 +93,20 @@ void Document::Load(QString _path)
 
      // read values from file
      name = json["name"].toString();
+
+     QJsonArray nodesArr = json["nodes"].toArray();
+
+     for(const auto& n : nodesArr)
+     {
+         // read each node values stored in json file
+         QJsonObject jsonNode(n.toObject());
+         int x = jsonNode["x"].toInt();
+         int y = jsonNode["y"].toInt();
+         QString tittle = jsonNode["tittle"].toString();
+
+         // add node following read datas
+         AddNode(x, y, tittle);
+     }
 
      qDebug() << name;
 }
