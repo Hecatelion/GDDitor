@@ -1,4 +1,1 @@
-- saving
-	- Save Nodes { posX, posY, tittle }
-
 - add links /!\
