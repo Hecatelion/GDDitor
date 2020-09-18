@@ -12,6 +12,8 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
+	std::cout << "Hippity hoppity, your repo is now my property" << std::endl;
+
     QApplication app(argc, argv);
 
     Editor editor;
